@@ -1,12 +1,12 @@
 import { View,Text } from 'react-native';
-export const Home = () => {
+export const Shopping = () => {
   return(
     <View style={styles.container}>
-      <Text>Home </Text>
-      
+      <Text>Compras</Text>
     </View>
   )
 }
+
 
 const styles = {
   container:{

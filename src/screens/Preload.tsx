@@ -1,7 +1,7 @@
-import React, {useEffect } from 'react'
-import { View,Text,Image } from 'react-native';
+import React, { useRef,useEffect } from 'react'
+import { Animated, View,Text,Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
+import { FontAwesome } from '@expo/vector-icons';
 export const Preload = () => {
   const navigation = useNavigation();
 
@@ -12,13 +12,35 @@ export const Preload = () => {
       index: 0,
       routes: [{ name: 'Inicio' }]
     });
-  },300000)
+  },1000)
   },[])
+
+  const rotation = useRef(new Animated.Value(0)).current;
+
+  useEffect(() => {
+    Animated.loop(
+      Animated.timing(rotation, {
+        toValue: 1,
+        duration: 1000,
+        useNativeDriver: true,
+      })
+    ).start();
+  }, []);
+
+  const spin = rotation.interpolate({
+    inputRange: [0, 1],
+    outputRange: ['0deg', '350deg'],
+  });
 
   return(
     <View style={style.container}>
       <Image source={require('../../assets/img/checkList.png')} style={style.img}/>
-      <Text style={style.title}><FontAwesomeIcon icon="square-check" />Supermarket List</Text>
+      <Text style={style.title}>Supermarket List</Text>
+      <Animated.View style={style.animated}>
+        <Animated.View style={{transform: [{ rotate: spin }]}}>
+          <FontAwesome name="circle-o-notch" spin style={style.icon} />
+        </Animated.View>
+      </Animated.View>
     </View>
   )
 }
@@ -34,6 +56,15 @@ const style = {
   img:{
     width:100,
     height:100
+  },
+  icon:{
+    fontSize:26,
+    color:'gray'
+  },
+  animated:{
+    paddingTop:10,
+    alignItems: 'center',
+    justifyContent: 'center',
   }
 }
 
