@@ -2,7 +2,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Home } from '../screens/Home';
 import { Lists } from '../screens/Lists';
 import { Shopping } from '../screens/Shopping';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon  from 'react-native-vector-icons/FontAwesome5';
 const Tab = createBottomTabNavigator();
 
 const TabsRouter = () => {
@@ -18,7 +18,7 @@ const TabsRouter = () => {
       <Tab.Screen 
         name="Listas" 
         component={Lists}  
-        options={{tabBarIcon: ({ color, size }) => (<Icon name="clipboard" color={color} size={size} />),
+        options={{tabBarIcon: ({ color, size }) => (<Icon name="tasks" color={color} size={size} />),
                   headerShown:false}}/>
       <Tab.Screen 
         name="Compras" 
